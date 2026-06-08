@@ -1,0 +1,843 @@
+/*
+ * =====================================================================
+ *  Catalog-Z  –  Pixel-perfect HTML5 / CSS3 Clone
+ *  Original design: TemplateMo 556 Catalog-Z
+ *  https://templatemo.com/tm-556-catalog-z
+ *
+ *  Author    : Catalog-Z Clone
+ *  Layout    : 100 % Flexbox — zero frameworks
+ *  Fonts     : Roboto (Google Fonts)
+ *  Icons     : Font Awesome 6
+ * =====================================================================
+ */
+
+/* =====================================================================
+   0.  CSS CUSTOM PROPERTIES  (Design Tokens)
+   ===================================================================== */
+
+:root {
+    /* ── Palette ─────────────────────────────────────────────── */
+    --color-bg:          #ffffff;           /* page background        */
+    --color-nav-bg:      #222222;           /* navbar background      */
+    --color-nav-text:    #ffffff;           /* navbar text            */
+    --color-nav-brand:   #ffffff;
+    --color-primary:     #007bff;           /* blue accent            */
+    --color-primary-h:   #0056c7;           /* hover shade            */
+    --color-footer-bg:   #333333;           /* footer background      */
+    --color-footer-text: #999999;           /* muted footer text      */
+    --color-text:        #333333;
+    --color-gray:        #666666;
+    --color-gray-light:  #999999;
+    --color-white:       #ffffff;
+    --color-caption-bg:  rgba(0, 0, 0, 0.55); /* figure caption overlay */
+    --color-loader-bg:   #222222;
+
+    /* ── Typography ──────────────────────────────────────────── */
+    --font-base: 'Roboto', sans-serif;
+    --fs-base:   16px;
+    --fs-sm:     14px;
+    --fs-xs:     13px;
+    --fw-normal: 400;
+    --fw-medium: 500;
+    --fw-bold:   700;
+
+    /* ── Spacing ─────────────────────────────────────────────── */
+    --space-1:  8px;
+    --space-2:  16px;
+    --space-3:  24px;
+    --space-4:  32px;
+    --space-5:  48px;
+    --space-6:  60px;
+    --space-7:  90px;
+
+    /* ── Transitions ─────────────────────────────────────────── */
+    --transition: 0.3s ease;
+
+    /* ── Navbar height ───────────────────────────────────────── */
+    --navbar-h: 56px;
+}
+
+/* =====================================================================
+   1.  RESET & BASE
+   ===================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-base);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-normal);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* =====================================================================
+   2.  PAGE LOADER
+   ===================================================================== */
+
+/* Loader wrapper covers full viewport */
+#loader-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    pointer-events: none;
+    transition: opacity 0.6s ease 0.2s, visibility 0.6s ease 0.2s;
+}
+
+/* Spinning ring */
+#loader {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #3498db;
+    animation: spin 2s linear infinite;
+    z-index: 1002;
+}
+
+#loader::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #e74c3c;
+    animation: spin 3s linear infinite;
+}
+
+#loader::after {
+    content: '';
+    position: absolute;
+    inset: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #f9c922;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0%   { transform: rotate(0deg);   }
+    100% { transform: rotate(360deg); }
+}
+
+/* Curtain panels */
+.loader-section {
+    position: fixed;
+    top: 0;
+    width: 51%;
+    height: 100%;
+    background: var(--color-loader-bg);
+    z-index: 1001;
+    transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1.000) 0.2s;
+}
+
+.loader-section--left  { left: 0;  transform: translateX(0); }
+.loader-section--right { right: 0; transform: translateX(0); }
+
+/* Once JS adds .loaded to <body> – slide curtains away & fade loader */
+body.loaded #loader-wrapper {
+    opacity: 0;
+    visibility: hidden;
+}
+
+body.loaded .loader-section--left  { transform: translateX(-100%); }
+body.loaded .loader-section--right { transform: translateX(100%);  }
+
+/* =====================================================================
+   3.  NAVBAR
+   ===================================================================== */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    background-color: var(--color-nav-bg);
+    height: var(--navbar-h);
+}
+
+/* Inner flex container */
+.navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 var(--space-3);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Brand / Logo */
+.navbar__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--color-nav-brand);
+    font-size: 1.25rem;
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    transition: opacity var(--transition);
+}
+
+.navbar__brand:hover { opacity: 0.85; }
+
+.navbar__brand .fa-film {
+    font-size: 1.1rem;
+}
+
+/* Nav menu list */
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+/* Nav links */
+.navbar__link {
+    display: block;
+    padding: 0 var(--space-2);
+    line-height: var(--navbar-h);
+    color: var(--color-nav-text);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color var(--transition), background-color var(--transition);
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+    color: var(--color-primary);
+}
+
+/* Hamburger button – hidden on desktop */
+.navbar__toggler {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--color-nav-text);
+    font-size: 1.2rem;
+    border-radius: 4px;
+    transition: color var(--transition);
+}
+
+.navbar__toggler:hover { color: var(--color-primary); }
+
+/* =====================================================================
+   4.  HERO / SEARCH SECTION
+   ===================================================================== */
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 460px;
+    background-image: url('../images/hero.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* Subtle fixed parallax-like feel */
+    background-attachment: fixed;
+}
+
+/* Search form */
+.search-form {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    max-width: 480px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.search-form__input {
+    flex: 1 1 auto;
+    padding: 14px 20px;
+    font-family: var(--font-base);
+    font-size: var(--fs-base);
+    border: none;
+    outline: none;
+    color: var(--color-text);
+    background: var(--color-white);
+}
+
+.search-form__input::placeholder { color: #aaaaaa; }
+
+.search-form__btn {
+    flex: 0 0 auto;
+    padding: 14px 22px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 1rem;
+    transition: background-color var(--transition);
+}
+
+.search-form__btn:hover { background-color: var(--color-primary-h); }
+
+/* =====================================================================
+   5.  MAIN CONTENT WRAPPER
+   ===================================================================== */
+
+.content-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--space-6) var(--space-3) 0;
+}
+
+/* =====================================================================
+   6.  SECTION HEADER (title + paging)
+   ===================================================================== */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.section-header__title {
+    font-size: 1.5rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-primary);
+    line-height: 1.2;
+}
+
+/* Inline paging "Page X of 200" */
+.paging-inline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--fs-sm);
+    color: var(--color-primary);
+}
+
+.paging-inline__input {
+    width: 36px;
+    padding: 2px 6px;
+    font-family: var(--font-base);
+    font-size: var(--fs-sm);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: 3px;
+    text-align: center;
+    outline: none;
+}
+
+.paging-inline__input:focus {
+    border-color: var(--color-primary-h);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+}
+
+/* =====================================================================
+   7.  PHOTO GALLERY GRID  (Flexbox, 4 columns → 3 → 2 → 1)
+   ===================================================================== */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;          /* compensates for item padding */
+    margin-bottom: var(--space-7);
+}
+
+.gallery__item {
+    /* 4-col desktop  ≈ 25 % minus gutter */
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 0 15px;
+    margin-bottom: var(--space-5);
+}
+
+/* ─── Card Figure ──────────────────────────────────────────────────── */
+
+.card-figure {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    /* Keep a consistent 3:2 aspect ratio */
+    aspect-ratio: 3 / 2;
+    background: #111;
+}
+
+.card-figure__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease, opacity 0.4s ease;
+}
+
+/* ─── "Ming" hover effect (caption slides in from bottom) ─────────── */
+
+.card-figure__caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+
+    /* Semi-transparent teal/dark overlay – matches original Ming effect */
+    background: rgba(78, 205, 196, 0.85);
+
+    /* Hidden by default – translate below the figure */
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-figure:hover .card-figure__caption {
+    transform: translateY(0);
+}
+
+.card-figure:hover .card-figure__img {
+    transform: scale(1.06);
+    opacity: 0.7;
+}
+
+.card-figure__heading {
+    font-size: 1.3rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-white);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.card-figure__link {
+    display: inline-block;
+    padding: 7px 20px;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--color-white);
+    border: 2px solid var(--color-white);
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.card-figure__link:hover {
+    background-color: var(--color-white);
+    color: #4ecdc4;
+}
+
+/* ─── Card Meta (date / views) ─────────────────────────────────────── */
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    font-size: var(--fs-xs);
+    color: var(--color-gray);
+}
+
+.card-meta__date  { color: var(--color-gray-light); }
+.card-meta__views { color: var(--color-gray);       }
+
+/* =====================================================================
+   8.  PAGINATION
+   ===================================================================== */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-7);
+}
+
+/* Prev / Next buttons */
+.pagination__btn {
+    display: inline-block;
+    padding: 8px 20px;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    border-radius: 4px;
+    transition: background-color var(--transition), opacity var(--transition);
+    letter-spacing: 0.3px;
+}
+
+.pagination__btn:hover {
+    background-color: var(--color-primary-h);
+    color: var(--color-white);
+}
+
+.pagination__btn--disabled {
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+/* Page number links */
+.pagination__pages {
+    display: flex;
+    gap: 4px;
+}
+
+.pagination__page {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--color-primary);
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.pagination__page:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.pagination__page--active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+/* =====================================================================
+   9.  FOOTER
+   ===================================================================== */
+
+.footer {
+    background-color: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-3);
+    font-size: var(--fs-sm);
+}
+
+.footer__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+}
+
+/* Footer columns */
+.footer__cols {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: var(--space-4);
+}
+
+.footer__col {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 0 var(--space-4);
+    margin-bottom: var(--space-5);
+}
+
+.footer__col--wide {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.footer__col--social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Footer headings */
+.footer__heading {
+    font-size: 1rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+    letter-spacing: 0.3px;
+}
+
+/* Footer paragraph */
+.footer__col p {
+    color: var(--color-footer-text);
+    line-height: 1.7;
+}
+
+.footer__col p a {
+    color: var(--color-primary);
+    transition: color var(--transition);
+}
+
+.footer__col p a:hover { color: var(--color-white); }
+
+/* Footer link list */
+.footer__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer__list a {
+    color: var(--color-footer-text);
+    font-size: var(--fs-sm);
+    transition: color var(--transition), padding-left var(--transition);
+}
+
+.footer__list a:hover {
+    color: var(--color-primary);
+    padding-left: 6px;
+}
+
+/* Social icons */
+.social-links {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.social-links__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+    color: var(--color-footer-text);
+    border: 1px solid var(--color-footer-text);
+    border-radius: 50%;
+    transition: color var(--transition), border-color var(--transition), background-color var(--transition);
+}
+
+.social-links__link:hover {
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+/* Legal links (Terms / Privacy) */
+.footer__legal-link {
+    display: block;
+    color: var(--color-footer-text);
+    font-size: var(--fs-sm);
+    margin-bottom: 6px;
+    text-align: right;
+    transition: color var(--transition);
+}
+
+.footer__legal-link:hover { color: var(--color-primary); }
+
+/* Footer bottom row (copyright + credit) */
+.footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4) 0;
+    border-top: 1px solid #444444;
+}
+
+.footer__copyright,
+.footer__credit {
+    font-size: var(--fs-xs);
+    color: var(--color-footer-text);
+}
+
+.footer__credit a {
+    color: var(--color-footer-text);
+    transition: color var(--transition);
+}
+
+.footer__credit a:hover { color: var(--color-primary); }
+
+/* =====================================================================
+   10.  RESPONSIVE  –  Tablet  ( ≤ 1199 px )
+   ===================================================================== */
+
+@media (max-width: 1199px) {
+    /* 3-column gallery */
+    .gallery__item {
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+    }
+}
+
+/* =====================================================================
+   11.  RESPONSIVE  –  Medium tablets  ( ≤ 991 px )
+   ===================================================================== */
+
+@media (max-width: 991px) {
+
+    /* ── Navbar: switch to hamburger layout ── */
+    .navbar__toggler {
+        display: flex;
+    }
+
+    .navbar__menu {
+        position: absolute;
+        top: var(--navbar-h);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: var(--color-nav-bg);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+        z-index: 800;
+    }
+
+    .navbar__menu.navbar__menu--open {
+        max-height: 300px;
+        border-top: 1px solid #333;
+    }
+
+    .navbar__item { width: 100%; }
+
+    .navbar__link {
+        line-height: 1;
+        padding: 14px 24px;
+        width: 100%;
+        border-bottom: 1px solid #333;
+    }
+
+    /* ── Footer: 2-col ── */
+    .footer__col--wide {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .footer__col {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .footer__col--social {
+        align-items: flex-start;
+    }
+
+    .social-links { justify-content: flex-start; }
+
+    .footer__legal-link { text-align: left; }
+
+    .footer__bottom { padding: var(--space-3) var(--space-4) 0; }
+}
+
+/* =====================================================================
+   12.  RESPONSIVE  –  Small tablets  ( ≤ 767 px )
+   ===================================================================== */
+
+@media (max-width: 767px) {
+    /* 2-column gallery */
+    .gallery__item {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    /* Hero shorter */
+    .hero { min-height: 340px; }
+
+    /* Search form full-width */
+    .search-form { max-width: calc(100% - 40px); }
+
+    /* Footer full-width columns */
+    .footer__col,
+    .footer__col--wide,
+    .footer__col--social {
+        flex: 0 0 100%;
+        max-width: 100%;
+        align-items: flex-start;
+    }
+
+    .social-links     { justify-content: flex-start; }
+    .footer__legal-link { text-align: left; }
+
+    .footer__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* =====================================================================
+   13.  RESPONSIVE  –  Mobile  ( ≤ 575 px )
+   ===================================================================== */
+
+@media (max-width: 575px) {
+    /* Single column gallery */
+    .gallery__item {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    /* Tighter spacing */
+    .content-wrap { padding-top: var(--space-4); }
+
+    .hero { min-height: 280px; background-attachment: scroll; }
+
+    .search-form { max-width: calc(100% - 32px); }
+
+    .section-header__title { font-size: 1.25rem; }
+
+    /* Pagination stack on very small screens */
+    .pagination {
+        justify-content: center;
+    }
+}
+
+/* =====================================================================
+   14.  UTILITY  –  Accessible focus ring
+   ===================================================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 3px;
+}

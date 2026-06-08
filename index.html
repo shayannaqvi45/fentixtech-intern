@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catalog-Z – a free photo and video catalog HTML5 template. Browse stunning photography collections by category.">
+    <title>Catalog-Z | Photo &amp; Video Template</title>
+
+    <!-- Google Fonts: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 (CDN – icons only, no framework CSS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- =====================
+         PAGE LOADER
+    ======================== -->
+    <div id="loader-wrapper" aria-hidden="true">
+        <div id="loader"></div>
+        <div class="loader-section loader-section--left"></div>
+        <div class="loader-section loader-section--right"></div>
+    </div>
+
+    <!-- =====================
+         NAVIGATION
+    ======================== -->
+    <nav class="navbar" id="main-nav">
+        <div class="navbar__inner">
+
+            <!-- Brand -->
+            <a class="navbar__brand" href="index.html" id="nav-brand">
+                <i class="fas fa-film" aria-hidden="true"></i>
+                Catalog-Z
+            </a>
+
+            <!-- Hamburger (mobile) -->
+            <button class="navbar__toggler" id="nav-toggler" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+
+            <!-- Nav links -->
+            <ul class="navbar__menu" id="nav-menu" role="menubar">
+                <li class="navbar__item" role="none">
+                    <a class="navbar__link navbar__link--active" href="index.html" role="menuitem" aria-current="page" id="nav-photos">Photos</a>
+                </li>
+                <li class="navbar__item" role="none">
+                    <a class="navbar__link" href="videos.html" role="menuitem" id="nav-videos">Videos</a>
+                </li>
+                <li class="navbar__item" role="none">
+                    <a class="navbar__link" href="about.html" role="menuitem" id="nav-about">About</a>
+                </li>
+                <li class="navbar__item" role="none">
+                    <a class="navbar__link" href="contact.html" role="menuitem" id="nav-contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- =====================
+         HERO / SEARCH
+    ======================== -->
+    <section class="hero" id="hero-section" aria-label="Hero section with search">
+        <form class="search-form" role="search" action="#" id="hero-search-form">
+            <input
+                class="search-form__input"
+                type="search"
+                placeholder="Search"
+                aria-label="Search photos"
+                id="search-input"
+            >
+            <button class="search-form__btn" type="submit" aria-label="Submit search" id="search-btn">
+                <i class="fas fa-search" aria-hidden="true"></i>
+            </button>
+        </form>
+    </section>
+
+    <!-- =====================
+         MAIN CONTENT
+    ======================== -->
+    <main class="content-wrap" id="main-content">
+
+        <!-- Section header row -->
+        <div class="section-header">
+            <h1 class="section-header__title">Latest Photos</h1>
+            <form class="paging-inline" action="#" id="paging-top-form">
+                <label for="page-input-top">Page</label>
+                <input
+                    type="text"
+                    value="1"
+                    id="page-input-top"
+                    class="paging-inline__input"
+                    aria-label="Current page"
+                >
+                <span>of 200</span>
+            </form>
+        </div>
+
+        <!-- Photo Gallery Grid -->
+        <div class="gallery" id="photo-gallery">
+
+            <!-- Card 1 – Clocks -->
+            <article class="gallery__item" id="card-clocks">
+                <figure class="card-figure">
+                    <img src="images/img-03.jpg" alt="Clocks" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Clocks</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-clocks">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">18 Oct 2020</span>
+                    <span class="card-meta__views">9,906 views</span>
+                </div>
+            </article>
+
+            <!-- Card 2 – Plants -->
+            <article class="gallery__item" id="card-plants">
+                <figure class="card-figure">
+                    <img src="images/img-04.jpg" alt="Plants" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Plants</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-plants">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">14 Oct 2020</span>
+                    <span class="card-meta__views">16,100 views</span>
+                </div>
+            </article>
+
+            <!-- Card 3 – Morning -->
+            <article class="gallery__item" id="card-morning">
+                <figure class="card-figure">
+                    <img src="images/img-05.jpg" alt="Morning" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Morning</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-morning">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">12 Oct 2020</span>
+                    <span class="card-meta__views">12,460 views</span>
+                </div>
+            </article>
+
+            <!-- Card 4 – Pinky -->
+            <article class="gallery__item" id="card-pinky">
+                <figure class="card-figure">
+                    <img src="images/img-06.jpg" alt="Pinky" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Pinky</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-pinky">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">10 Oct 2020</span>
+                    <span class="card-meta__views">11,402 views</span>
+                </div>
+            </article>
+
+            <!-- Card 5 – Hangers -->
+            <article class="gallery__item" id="card-hangers">
+                <figure class="card-figure">
+                    <img src="images/img-01.jpg" alt="Hangers" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Hangers</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-hangers">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">24 Sep 2020</span>
+                    <span class="card-meta__views">16,008 views</span>
+                </div>
+            </article>
+
+            <!-- Card 6 – Perfumes -->
+            <article class="gallery__item" id="card-perfumes">
+                <figure class="card-figure">
+                    <img src="images/img-02.jpg" alt="Perfumes" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Perfumes</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-perfumes">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">20 Sep 2020</span>
+                    <span class="card-meta__views">12,860 views</span>
+                </div>
+            </article>
+
+            <!-- Card 7 – Bus -->
+            <article class="gallery__item" id="card-bus">
+                <figure class="card-figure">
+                    <img src="images/img-07.jpg" alt="Bus" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Bus</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-bus">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">16 Sep 2020</span>
+                    <span class="card-meta__views">10,900 views</span>
+                </div>
+            </article>
+
+            <!-- Card 8 – New York -->
+            <article class="gallery__item" id="card-newyork">
+                <figure class="card-figure">
+                    <img src="images/img-08.jpg" alt="New York" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">New York</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-newyork">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">12 Sep 2020</span>
+                    <span class="card-meta__views">11,300 views</span>
+                </div>
+            </article>
+
+            <!-- Card 9 – Abstract -->
+            <article class="gallery__item" id="card-abstract">
+                <figure class="card-figure">
+                    <img src="images/img-09.jpg" alt="Abstract" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Abstract</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-abstract">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">10 Sep 2020</span>
+                    <span class="card-meta__views">42,700 views</span>
+                </div>
+            </article>
+
+            <!-- Card 10 – Flowers -->
+            <article class="gallery__item" id="card-flowers">
+                <figure class="card-figure">
+                    <img src="images/img-10.jpg" alt="Flowers" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Flowers</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-flowers">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">8 Sep 2020</span>
+                    <span class="card-meta__views">11,402 views</span>
+                </div>
+            </article>
+
+            <!-- Card 11 – Rosy -->
+            <article class="gallery__item" id="card-rosy">
+                <figure class="card-figure">
+                    <img src="images/img-11.jpg" alt="Rosy" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Rosy</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-rosy">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">4 Sep 2020</span>
+                    <span class="card-meta__views">32,906 views</span>
+                </div>
+            </article>
+
+            <!-- Card 12 – Rocki -->
+            <article class="gallery__item" id="card-rocki">
+                <figure class="card-figure">
+                    <img src="images/img-12.jpg" alt="Rocki" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Rocki</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-rocki">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">28 Aug 2020</span>
+                    <span class="card-meta__views">50,700 views</span>
+                </div>
+            </article>
+
+            <!-- Card 13 – Purple -->
+            <article class="gallery__item" id="card-purple">
+                <figure class="card-figure">
+                    <img src="images/img-13.jpg" alt="Purple" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Purple</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-purple">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">22 Aug 2020</span>
+                    <span class="card-meta__views">107,510 views</span>
+                </div>
+            </article>
+
+            <!-- Card 14 – Sea -->
+            <article class="gallery__item" id="card-sea">
+                <figure class="card-figure">
+                    <img src="images/img-14.jpg" alt="Sea" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Sea</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-sea">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">14 Aug 2020</span>
+                    <span class="card-meta__views">118,006 views</span>
+                </div>
+            </article>
+
+            <!-- Card 15 – Turtle -->
+            <article class="gallery__item" id="card-turtle">
+                <figure class="card-figure">
+                    <img src="images/img-15.jpg" alt="Turtle" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Turtle</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-turtle">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">9 Aug 2020</span>
+                    <span class="card-meta__views">121,300 views</span>
+                </div>
+            </article>
+
+            <!-- Card 16 – Peace -->
+            <article class="gallery__item" id="card-peace">
+                <figure class="card-figure">
+                    <img src="images/img-16.jpg" alt="Peace" class="card-figure__img" loading="lazy">
+                    <figcaption class="card-figure__caption">
+                        <h2 class="card-figure__heading">Peace</h2>
+                        <a href="photo-detail.html" class="card-figure__link" id="link-peace">View more</a>
+                    </figcaption>
+                </figure>
+                <div class="card-meta">
+                    <span class="card-meta__date">3 Aug 2020</span>
+                    <span class="card-meta__views">21,204 views</span>
+                </div>
+            </article>
+
+        </div><!-- /.gallery -->
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination-row">
+            <a href="#" class="pagination__btn pagination__btn--prev pagination__btn--disabled" id="btn-prev" aria-disabled="true">Previous</a>
+            <nav class="pagination__pages" aria-label="Page navigation">
+                <a href="#" class="pagination__page pagination__page--active" id="page-1" aria-current="page" aria-label="Page 1">1</a>
+                <a href="#" class="pagination__page" id="page-2" aria-label="Page 2">2</a>
+                <a href="#" class="pagination__page" id="page-3" aria-label="Page 3">3</a>
+                <a href="#" class="pagination__page" id="page-4" aria-label="Page 4">4</a>
+            </nav>
+            <a href="#" class="pagination__btn pagination__btn--next" id="btn-next">Next Page</a>
+        </div>
+
+    </main>
+
+    <!-- =====================
+         FOOTER
+    ======================== -->
+    <footer class="footer" id="site-footer">
+        <div class="footer__inner">
+
+            <!-- Footer columns row -->
+            <div class="footer__cols">
+
+                <!-- About -->
+                <div class="footer__col footer__col--wide" id="footer-about">
+                    <h3 class="footer__heading">About Catalog-Z</h3>
+                    <p>Catalog-Z is a free HTML5 template for photo and video catalog websites. Freely use this layout for a front-end integration with any kind of CMS website.</p>
+                </div>
+
+                <!-- Our Links -->
+                <div class="footer__col" id="footer-links">
+                    <h3 class="footer__heading">Our Links</h3>
+                    <ul class="footer__list" id="footer-link-list">
+                        <li><a href="#" id="footer-advertise">Advertise</a></li>
+                        <li><a href="#" id="footer-support">Support</a></li>
+                        <li><a href="#" id="footer-company">Our Company</a></li>
+                        <li><a href="#" id="footer-contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social + Legal -->
+                <div class="footer__col footer__col--social" id="footer-social">
+                    <ul class="social-links" id="social-links-list">
+                        <li>
+                            <a href="https://facebook.com" class="social-links__link" id="social-facebook" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-facebook" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com" class="social-links__link" id="social-twitter" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-twitter" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com" class="social-links__link" id="social-instagram" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pinterest.com" class="social-links__link" id="social-pinterest" aria-label="Pinterest" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-pinterest" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="#" class="footer__legal-link" id="footer-terms">Terms of Use</a>
+                    <a href="#" class="footer__legal-link" id="footer-privacy">Privacy Policy</a>
+                </div>
+
+            </div><!-- /.footer__cols -->
+
+            <!-- Copyright row -->
+            <div class="footer__bottom">
+                <span class="footer__copyright" id="footer-copyright">Copyright 2020 Catalog-Z Company. All rights reserved.</span>
+                <span class="footer__credit" id="footer-credit">Designed by <a href="https://templatemo.com" target="_blank" rel="noopener noreferrer">TemplateMo</a></span>
+            </div>
+
+        </div><!-- /.footer__inner -->
+    </footer>
+
+    <!-- Minimal vanilla JS: loader hide + mobile nav toggle (no framework) -->
+    <script>
+        // Hide page loader after window load
+        window.addEventListener('load', function () {
+            document.body.classList.add('loaded');
+        });
+
+        // Mobile nav toggle
+        var toggler = document.getElementById('nav-toggler');
+        var menu    = document.getElementById('nav-menu');
+        if (toggler && menu) {
+            toggler.addEventListener('click', function () {
+                var expanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', String(!expanded));
+                menu.classList.toggle('navbar__menu--open');
+            });
+        }
+    </script>
+
+</body>
+</html>
